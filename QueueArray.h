@@ -2,62 +2,109 @@
 
 using namespace std;
 
+class Node1
+{	
+public:
+	Node1 *rChild;
+	int data;
+	Node1 *lChild;
+
+	Node1()
+	{
+		data = 0;
+		rChild = NULL;
+		lChild = NULL;
+	}
+
+	Node1(int data)
+	{
+		this->data = data;
+		rChild = NULL;
+		lChild = NULL;
+	}
+
+	~Node1()
+	{
+		delete rChild;
+		delete lChild;
+	}
+};
+
+
 template<class T>
 class QueueArray
 {
-	private:
-			int size, rear, front;
+	public:
+			int size, rear,front;
 			T* queue;
 	public:
-		QueueArray()
-		{
-			size = 10;
-			rear = front = -1;
-			queue = new T[size];
-		}
-
-		~QueueArray()
-		{
-			delete [] queue;
-		}
-
-		void Enqueue(int);
-		void Dequeue();
+		QueueArray(int size);
+		QueueArray();
+		~QueueArray();
+		void Enqueue(T);
+		T Dequeue();
 		bool IsEmpty();
 		bool IsFull();
 		void Show();
 };
 
+
+template<class T>
+QueueArray<T>::QueueArray(int size)
+{
+	this->size = size;
+	rear = front = -1;
+	queue = new T[size];
+}
+
+template<class T>
+QueueArray<T>::QueueArray()
+{
+	size = 10;
+	rear = front = -1;
+	queue = new T[size];
+}
+
+template<class T>
+QueueArray<T>::~QueueArray()
+{
+	delete [] queue;
+}
+
 //Addition function
 template<class T>
-void QueueArray<T>::Enqueue(int number)
+void QueueArray<T>::Enqueue(T data)
 {
 	if(IsFull())
 		cout <<"Queue Array is full"<<endl;
 	else
-		queue[++rear] = number;
+		queue[++rear] = data;
 }
 
 //Deletion function
 template<class T>
-void QueueArray<T>::Dequeue()
+T QueueArray<T>::Dequeue()
 {
+	T data = 0;
+
 	if(IsEmpty())
 		cout <<"Queue Array is empty"<<endl;
 	else
-		queue[++front] = 0; 
+		data = queue[++front];
+	
+	return data;
 }
 
 template<class T>
 bool QueueArray<T>::IsEmpty()
 {
-	return (rear==front)?1:0;
+	return (rear == front)?1:0;
 }
 
 template<class T>
 bool QueueArray<T>::IsFull()
 {
-	return (rear==size-1)?1:0;
+	return (rear == size-1)?1:0;
 }
 
 template<class T>

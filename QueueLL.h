@@ -3,16 +3,16 @@
 using namespace std;
 
 template<class T>
-class Nodee
+class Node2
 {
 	public:
 		T data;
-		Nodee* next;
-		Nodee()
+		Node2* next;
+		Node2()
 		{
 			next = NULL;
 		}
-		~Nodee()
+		~Node2()
 		{
 			delete next;
 		}
@@ -23,7 +23,7 @@ template<class M>
 class QueueLL
 {
 	private:
-		Nodee<M> *rear, *front;
+		Node2<M> *rear, *front;
 	
 	public:
 		QueueLL();
@@ -57,7 +57,7 @@ QueueLL<M>::~QueueLL()
 template<class M>
 void QueueLL<M>::Enqueue(M value)
 {
-	Nodee<M>* temp = new Nodee<M>();
+	Node2<M>* temp = new Node2<M>();
 
 	if(temp == NULL)
 		cout << "HEAP memory is full" << endl;
@@ -66,7 +66,7 @@ void QueueLL<M>::Enqueue(M value)
 		temp->data = value;
 		temp->next = NULL;
 
-		if(front == NULL) // first time adding Nodee
+		if(front == NULL) // first time adding Node2
 			front = rear = temp;
 		else
 		{
@@ -80,7 +80,7 @@ template<class M>
 int QueueLL<M>::Dequeue()
 {
 	int value;
-	Nodee<M>* temp;
+	Node2<M>* temp;
 	if(front == NULL)
 	{
 		cout << "Queue is empty" << endl;
